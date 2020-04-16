@@ -1,0 +1,257 @@
+import React, { Component } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import Axios from "axios";
+
+export default class AddEmployee extends Component {
+  state = {
+    date: new Date(),
+    v_first_name: "",
+    v_last_name: "",
+    v_cnic: "",
+    v_dob: new Date(),
+    v_contact_no: 0,
+    v_age: "",
+    v_employee_type: "",
+    stateOfRecord: "true",
+    validation: false
+  };
+  componentWillMount() {}
+
+  getFirstName = e => {
+    this.setState({
+      v_first_name: e.target.value
+    });
+  };
+  getLastName = e => {
+    this.setState({
+      v_last_name: e.target.value
+    });
+  };
+  getCnic = e => {
+    this.setState({
+      v_cnic: e.target.value
+    });
+  };
+  getDOB = date => {
+    this.setState({
+      v_dob: date
+    });
+  };
+  getContactNo = e => {
+    this.setState({
+      v_contact_no: e.target.value
+    });
+  };
+
+  getEmployeeType = e => {
+    this.setState({
+      v_employee_type: e.target.value
+    });
+  };
+  getDate = date => {
+    this.setState({
+      date: date
+    });
+  };
+
+  AddValues = e => {
+    e.preventDefault();
+    if (
+      this.state.v_cnic === "" ||
+      this.state.v_first_name === "" ||
+      this.state.v_last_name === "" ||
+      this.state.v_contact_no === "" ||
+      this.state.v_employee_type === ""
+    ) {
+      this.setState({
+        validation: true
+      });
+      return;
+    }
+
+    const employee = {
+      first_name: this.state.v_first_name,
+      last_name: this.state.v_last_name,
+      cnic: this.state.v_cnic,
+      dob: this.state.v_dob,
+      contact_no: Number(this.state.v_contact_no),
+      employee_type: this.state.v_employee_type,
+      balance: this.state.balance,
+      date: this.state.date
+    };
+    Axios.post("http://localhost:5000/employee/add", employee).then(res =>
+      console.log(res.data)
+    );
+
+    this.setState({
+      stateOfRecord: false
+    });
+    // const AR = {
+    //   item_name: this.state.v_pro_name,
+    //   quantity: Number(this.state.v_quantity),
+    //   total_price: this.state.v_total_price,
+    //   debtor_name: this.state.v_debtor_name,
+    //   discount: Number(this.state.v_discount),
+    //   date: this.state.date
+    // };
+    // if (this.state.v_debtor_name !== "none") {
+    //   Axios.post("http://localhost:5000/AR/add", AR).then(res =>
+    //     console.log(res.data)
+    //   );
+    // }
+
+    window.location = "/employee";
+  };
+
+  render() {
+    return (
+      <div>
+        <div className="text-center mt-2 display-4 bg-light topHeader">
+          Employee Registration
+        </div>
+        <form>
+          <div className="from-row">
+            <div className="col-md-3 ml-3 mb-3 mb-form">
+              <label htmlFor="validationDefault22">First Name</label>
+              <input
+                type="text"
+                onChange={this.getFirstName}
+                placeholder="eg. Ali"
+                className="form-control"
+                id="validationDefault22"
+                required
+              />
+            </div>
+            <div className="col-md-3 ml-3 mb-3 mb-form">
+              <label htmlFor="validationDefault22">Last Name</label>
+              <input
+                type="text"
+                onChange={this.getLastName}
+                placeholder="eg. Raza"
+                className="form-control"
+                id="validationDefault22"
+                required
+              />
+            </div>
+            <div className="col-md-4 ml-3 mb-3 mb-form">
+              <label htmlFor="validationDefaultUsername22">Cnic</label>
+              <input
+                type="text"
+                onChange={this.getCnic}
+                placeholder="xxxxx-xxxxxxx-x"
+                className="form-control"
+                id="validationDefaultUsername22"
+                aria-describedby="inputGroupPrepend23"
+                required
+              />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="col-md-2 ml-3 mb-3 mb-form">
+              <label>Date : </label>
+              <div>
+                <DatePicker
+                  selected={this.state.date}
+                  onChange={this.getDate}
+                />
+              </div>
+            </div>
+            <div className="col-md-2 ml-3 mb-3 mb-form">
+              <label htmlFor="validationDefault22">Contact no</label>
+              <input
+                type="text"
+                onChange={this.getContactNo}
+                className="form-control"
+                id="validationDefault22"
+                required
+              />
+            </div>
+            <div className="col-md-2 ml-3 mb-3 mb-form">
+              <label>Date of Birth: </label>
+              <div>
+                <DatePicker
+                  selected={this.state.v_dob}
+                  onChange={this.getDOB}
+                />
+              </div>
+            </div>
+            <div className="col-md-2 ml-3 mb-3 mb-form">
+              <p>Employee Type </p>
+              <input
+                type="radio"
+                name="employeeType"
+                id="A"
+                value="A"
+                onChange={this.getEmployeeType}
+              ></input>
+              <label for="A">A</label>
+              <input
+                className="ml-2"
+                type="radio"
+                name="employeeType"
+                id="B"
+                value="B"
+                onChange={this.getEmployeeType}
+              ></input>
+              <label for="B">B</label>
+              <input
+                className="ml-2"
+                type="radio"
+                name="employeeType"
+                id="C"
+                value="C"
+                onChange={this.getEmployeeType}
+              ></input>
+              <label for="C">C</label>
+              <input
+                className="ml-2"
+                type="radio"
+                name="employeeType"
+                id="D"
+                value="D"
+                onChange={this.getEmployeeType}
+              ></input>
+              <label for="D">D</label>
+              <input
+                className="ml-2"
+                type="radio"
+                name="employeeType"
+                id="E"
+                value="E"
+                onChange={this.getEmployeeType}
+              ></input>
+              <label for="E">E</label>
+              <input
+                className="ml-2"
+                type="radio"
+                name="employeeType"
+                id="F"
+                value="F"
+                onChange={this.getEmployeeType}
+              ></input>
+              <label for="F">F</label>
+            </div>
+          </div>
+        </form>
+
+        <div className=" text-center">
+          {this.state.validation ? (
+            <p className="text-danger">You must fill all the values</p>
+          ) : (
+            <></>
+          )}
+          <button
+            className="btn btn-secondary "
+            onClick={this.AddValues}
+            style={{
+              backgroundColor: this.state.stateOfRecord ? "#d9534f" : "#5cb85c"
+            }}
+          >
+            Save Record
+          </button>
+        </div>
+      </div>
+    );
+  }
+}

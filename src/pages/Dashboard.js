@@ -85,16 +85,16 @@ export default class Home extends Component {
       var Amount = Number(data2[i].total_price);
       ArrayAmount2.push(Amount);
     }
-    if (ArrayAmount2[0] === undefined) {
-      return;
-    }
-    const TotalAmount2 = ArrayAmount2.reduce(function(a, b) {
-      return a + b;
-    });
-    if (this.state.yearSale !== TotalAmount2)
-      this.setState({
-        yearSale: TotalAmount2
+    if (ArrayAmount2[0] !== undefined) {
+      const TotalAmount2 = ArrayAmount2.reduce(function(a, b) {
+        return a + b;
       });
+      if (this.state.yearSale !== TotalAmount2)
+        this.setState({
+          yearSale: TotalAmount2
+        });
+    }
+
     const data5 = this.state.Purchase.filter(el => {
       var saleDate = new Date(el.date);
       return saleDate > startofYear;
@@ -104,18 +104,18 @@ export default class Home extends Component {
       var Amount = Number(data5[i].total_price);
       ArrayAmount5.push(Amount);
     }
-    if (ArrayAmount5[0] === undefined) {
-      return;
-    }
-    const TotalAmount5 = ArrayAmount5.reduce(function(a, b) {
-      return a + b;
-    });
-    if (this.state.yearPurchase !== TotalAmount5)
-      this.setState({
-        yearPurchase: TotalAmount5
+    if (ArrayAmount5[0] !== undefined) {
+      const TotalAmount5 = ArrayAmount5.reduce(function(a, b) {
+        return a + b;
       });
+      if (this.state.yearPurchase !== TotalAmount5)
+        this.setState({
+          yearPurchase: TotalAmount5
+        });
+    }
+
     const startofMonth = new Date();
-    startofMonth.setDate(1);
+    startofMonth.setDate(0);
     const data1 = this.state.defaultSale.filter(el => {
       var saleDate = new Date(el.date);
       return saleDate > startofMonth;
@@ -125,16 +125,16 @@ export default class Home extends Component {
       var Amount = Number(data1[i].total_price);
       ArrayAmount1.push(Amount);
     }
-    if (ArrayAmount1[0] === undefined) {
-      return;
-    }
-    const TotalAmount1 = ArrayAmount1.reduce(function(a, b) {
-      return a + b;
-    });
-    if (this.state.monthSale !== TotalAmount1)
-      this.setState({
-        monthSale: TotalAmount1
+    if (ArrayAmount1[0] !== undefined) {
+      const TotalAmount1 = ArrayAmount1.reduce(function(a, b) {
+        return a + b;
       });
+      if (this.state.monthSale !== TotalAmount1)
+        this.setState({
+          monthSale: TotalAmount1
+        });
+    }
+
     const data4 = this.state.Purchase.filter(el => {
       var saleDate = new Date(el.date);
       return saleDate > startofMonth;
@@ -144,24 +144,23 @@ export default class Home extends Component {
       var Amount = Number(data4[i].total_price);
       ArrayAmount4.push(Amount);
     }
-    if (ArrayAmount4[0] === undefined) {
-      return;
-    }
-    const TotalAmount4 = ArrayAmount4.reduce(function(a, b) {
-      return a + b;
-    });
-    if (this.state.monthPurchase !== TotalAmount4)
-      this.setState({
-        monthPurchase: TotalAmount4
+    if (ArrayAmount4[0] !== undefined) {
+      const TotalAmount4 = ArrayAmount4.reduce(function(a, b) {
+        return a + b;
       });
-      const ArrayAmount6 = [];
+      if (this.state.monthPurchase !== TotalAmount4)
+        this.setState({
+          monthPurchase: TotalAmount4
+        });
+    }
+
+    const ArrayAmount6 = [];
     for (var i = 0; i < this.state.AP.length; i++) {
       var Amount = Number(this.state.AP[i].total_price);
       ArrayAmount6.push(Amount);
+    }
 
-      if (ArrayAmount6[0] === undefined) {
-        return;
-      }
+    if (ArrayAmount6[0] !== undefined) {
       const TotalAmount6 = ArrayAmount6.reduce(function(a, b) {
         return a + b;
       });
@@ -170,14 +169,13 @@ export default class Home extends Component {
           payable: TotalAmount6
         });
     }
+
     const ArrayAmount7 = [];
     for (var i = 0; i < this.state.AR.length; i++) {
       var Amount = Number(this.state.AR[i].total_price);
       ArrayAmount7.push(Amount);
-
-      if (ArrayAmount7[0] === undefined) {
-        return;
-      }
+    }
+    if (ArrayAmount7[0] !== undefined) {
       const TotalAmount7 = ArrayAmount7.reduce(function(a, b) {
         return a + b;
       });
@@ -199,16 +197,15 @@ export default class Home extends Component {
       var Amount = Number(data[i].total_price);
       ArrayAmount.push(Amount);
     }
-    if (ArrayAmount[0] === undefined) {
-      return;
-    }
-    const TotalAmount = ArrayAmount.reduce(function(a, b) {
-      return a + b;
-    });
-    if (this.state.todaySale !== TotalAmount)
-      this.setState({
-        todaySale: TotalAmount
+    if (ArrayAmount[0] !== undefined) {
+      const TotalAmount = ArrayAmount.reduce(function(a, b) {
+        return a + b;
       });
+      if (this.state.todaySale !== TotalAmount)
+        this.setState({
+          todaySale: TotalAmount
+        });
+    }
 
     const data3 = this.state.Purchase.filter(el => {
       var saleDate = new Date(el.date);
@@ -219,18 +216,15 @@ export default class Home extends Component {
       var Amount = Number(data3[i].total_price);
       ArrayAmount3.push(Amount);
     }
-    if (ArrayAmount3[0] === undefined) {
-      return;
-    }
-    const TotalAmount3 = ArrayAmount3.reduce(function(a, b) {
-      return a + b;
-    });
-    if (this.state.todayPurchase !== TotalAmount3)
-      this.setState({
-        todayPurchase: TotalAmount3
+    if (ArrayAmount3[0] !== undefined) {
+      const TotalAmount3 = ArrayAmount3.reduce(function(a, b) {
+        return a + b;
       });
-
-    
+      if (this.state.todayPurchase !== TotalAmount3)
+        this.setState({
+          todayPurchase: TotalAmount3
+        });
+    }
   }
   render() {
     return (
